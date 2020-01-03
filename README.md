@@ -7,7 +7,8 @@ social.
 
 #### La mayor parte del código es Extract, Transform and Load (ETL) process.
 
-# Script en R para analizar y normalizar base de datos de la *Encuesta de Seguimiento a Egresados de El Colegio de México*
+# Script en R para analizar y normalizar base de datos de la 
+### *Encuesta de Seguimiento a Egresados de El Colegio de México*
 
 ```r
 BaseC <- load("BaseC.Rda") #  591
