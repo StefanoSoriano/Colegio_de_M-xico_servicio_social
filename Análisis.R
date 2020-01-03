@@ -1,6 +1,6 @@
 # Proyecto Egresados Colmex
-# Encuesta de Seguimiento a Egresados de El Colegio de Mexico
-# Mauricio Rodriguez Abreu // Stephano Soriano Urbán 
+# Encuesta de Seguimiento a Egresados de El Colegio de México
+# Mauricio Rodríguez Abreu // Stephano Soriano Urbán 
 # Agosto 2017... Noviembre 2017
 
 # Script para analizar la base de datos 
@@ -13,7 +13,6 @@ dataC <- data
 dataC$BaseCom <- rep("C", length(data$id))
 # Ordenando la base para que aparezca BaseCom en la primera columna
 dataC <- dataC[c(395, 1:394)]
-
 
 # La base Incompleta:
 
@@ -31,8 +30,6 @@ save(data, file = "BaseU.Rda")
 
 
 load("BaseU.Rda")
-
-
 
 
 # ********************************************************************************
@@ -129,7 +126,7 @@ colnames(data)[86] <- "DocTitulo2"
 colnames(data)[87] <- "DocAnioTit2"
 colnames(data)[88] <- "NoTitulo1"
 colnames(data)[89] <- "NoTitulo2"
-# Razones para elegir el Colegio de Mexico
+# Razones para elegir el Colegio de México
 colnames(data)[90] <- "RazonColmex"
 colnames(data)[91] <- "RazonColmex2"
 colnames(data)[92] <- "RazonPrograma"
@@ -169,7 +166,7 @@ colnames(data)[124] <- "TP7_AnioF"
 colnames(data)[125] <- "TP8_Empresa"
 colnames(data)[126] <- "TP8_AnioI"
 colnames(data)[127] <- "TP8_AnioF"
-# Empleo despues del colmex
+# Empleo después del colmex
 colnames(data)[128] <- "EmpleoSalir"
 colnames(data)[129] <- "EmpleoBusqueda"
 colnames(data)[130] <- "NumTrabajos"
@@ -301,7 +298,7 @@ colnames(data)[252] <- "T10Institucion"
 colnames(data)[253] <- "T10Funcion"
 colnames(data)[254] <- "T10Entrada"
 colnames(data)[255] <- "T10Salida"
-# Exigencias del desempenio profesional
+# Exigencias del desempeño profesional
 colnames(data)[256] <- "Exigencia1"
 colnames(data)[257] <- "Exigencia2"
 colnames(data)[258] <- "Exigencia3"
@@ -442,14 +439,9 @@ colnames(data)[392] <- "MismoProgramaC"
 colnames(data)[393] <- "OtroProgramaC"
 
 # ********************************************************************************
+# Segunda fase, análisis de la calidad de las respuestas
 # ********************************************************************************
-# ********************************************************************************
-# ********************************************************************************
-# Segunda fase, analisis de la calidad de las respuestas
-# ********************************************************************************
-# ********************************************************************************
-# ********************************************************************************
-# ********************************************************************************
+
 # Valores perdidos de cada variable
 for (Var in names(data)) {
     missing <- sum(is.na(data[, Var]))
@@ -458,12 +450,7 @@ for (Var in names(data)) {
     }
 }
 
-
-
-# ********************************************************************************
-# *******************************************************************************
-
-# instalando y utilizando libreria; dplyr   
+# instalando y utilizando librería; dplyr   
 
 if (!("dplyr" %in% rownames(installed.packages()))) {
     install.packages("dplyr")
@@ -471,7 +458,7 @@ if (!("dplyr" %in% rownames(installed.packages()))) {
 
 library(dplyr)
 
-# instalando y activando la libreria; stringr    Para convertir caracteres a codificacion "UTF-8"   
+# instalando y activando la librería; stringr    Para convertir caracteres a codificación "UTF-8"   
 
 if (!("stringr" %in% rownames(installed.packages()))) {
     install.packages("stringr")
@@ -486,7 +473,7 @@ library(stringr)
 Sexofil <- filter(data, Sexo == "m" | Sexo == "M");
 select(Sexofil, "id", "Nombre(s)")
 
-# Cuando se analiza por medio del nombre quien es del sexo femenino o masculino se insertan los numeros de id
+# Cuando se analiza por medio del nombre quién es del sexo femenino o masculino se insertan los números de id
 
 data$Sexor <- ifelse(data$id == 71, 2, data$Sexo);
 data$Sexor <- ifelse(data$id == 641, 2, data$Sexor);
@@ -518,15 +505,15 @@ data$EdadNum <- as.numeric(data$Edad)
 summary(data$EdadNum)
 
 # ********************************************************************************
-# Informacion sobre licenciatura
+# Información sobre licenciatura
 
 
-# Pais en donde se realizaron los estudios de licenciatura
+# País en donde se realizaron los estudios de licenciatura
 
 data$temp<-0
 
-# La siguiente linea es por si respondienron solamente en la segunda opcion, 
-# dejando la primera vacia
+# La siguiente línea es por si respondieron solamente en la segunda opción, 
+# dejando la primera vacía
 
 table(data$LicPais, exclude=F)
 
@@ -642,7 +629,7 @@ data$temp <- ifelse(data$temp=="OTRO",3,data$temp)
 data$LicPaisT2 = data$temp
 
 
-# Recodificando institucion
+# Recodificando institución
 
 data$temp <- 0
 data$LicInstitucion <- str_conv(data$LicInstitucion, "UTF-8")
@@ -750,7 +737,7 @@ data$LicInicioT<-data$temp
 
 data$temp<-NA
 
-#Termino Lic
+#Término Lic
 
 data$temp<-as.numeric(as.character(data$LicTermino))
 
@@ -851,7 +838,7 @@ data$temp <- ifelse(data$temp=="OtraExt",14,data$temp)
 
 data$LicInstitucionT2 = data$temp
 
-# Anio inicio lic 2
+# Año inicio lic 2
 
 data$temp<-as.numeric(as.character(data$LicInicio2))
 data$LicInicioT2<-data$temp
@@ -893,7 +880,7 @@ data$LicPColmex <- ifelse(data$LicPColmex=="PAP",2,data$LicPColmex)
 
 
 
-# Ahora repito para maestria
+# Ahora repito para maestría
 
 data$MaesPais = str_conv(data$MaesPais, "UTF-8")
 data$MaesPais2 = str_conv(data$MaesPais2, "UTF-8")
@@ -906,7 +893,7 @@ data$temp<-ifelse(is.na(data$MaesPais) & !is.na(data$MaesPais2),data$MaesPais2,d
 data$MaesPais2<-ifelse(is.na(data$MaesPais) & !is.na(data$MaesPais2),NA,data$MaesPais2)
 data$MaesPais<-data$temp
 
-# Pais donde estudio
+# País donde estudió
 
 data$temp<-NA
 
@@ -965,7 +952,7 @@ data$temp <- gsub("(?i)egipto", "OTRO", data$temp);
 data$temp <- gsub("(?i)jap??n", "OTRO", data$temp);
 data$temp <- gsub("Jap(.*)n", "OTRO", data$temp);
 
-# Este es despues de una revision visual
+# Este es después de una revisión visual
 data$temp <- ifelse(data$id == 86, "MEX", data$temp)
 data$temp <- ifelse(data$id == 786, "MEX", data$temp)
 
@@ -981,11 +968,11 @@ data$temp<-ifelse(data$temp=="OTRO",5,data$temp)
 data$temp<-ifelse(data$temp=="SinMaes",9,data$temp)
 
 
-data$MaesPaisT = data$temp # Aqui por ejemplo, ya asignamos los valores de temp a la variables MaesPaisT
+data$MaesPaisT = data$temp # Aquí por ejemplo, ya asignamos los valores de temp a la variables MaesPaisT
 
 data$temp<-NA 
 
-# Segunda maestria
+# Segunda maestría
 
 data$temp <- gsub("(?i)EXIC(.*)", "MEX", data$MaesPais2);
 data$temp <- gsub("(?i)XICO", "MEX", data$temp);
@@ -1039,7 +1026,7 @@ data$MaesPaisT2 = data$temp
 
 data$temp<-NA 
 
-# Recodificando institucion de maestria
+# Recodificando institución de maestría
 
 data$temp<-NA
 
@@ -1270,7 +1257,7 @@ data$temp<-ifelse(is.na(data$temp),9999,data$temp)
 data$DocTerminoT<-data$temp
 
 
-# Pais donde estudio doc2
+# País donde estudió doc2
 
 data$temp<-NA
 
@@ -1300,7 +1287,7 @@ data$DocPaisT2<-data$temp
 data$temp<-NA
 
 
-# Doctorado institucion
+# Doctorado institución
 
 data$temp<-ifelse(is.na(data$DocInstitucion) & !is.na(data$DocInstitucion2),data$DocInstitucion2,data$DocInstitucion)
 data$DocInstitucion2<-ifelse(is.na(data$DocInstitucion) & !is.na(data$DocInstitucion2),NA,data$DocInstitucion2)
@@ -1416,7 +1403,7 @@ data$LicPColmex<-data$temp
 
 data$temp<-NA
 
-# Maestria
+# Maestría
 
 data$temp<-ifelse(data$MaesColmex==1 & data$MaesInstitucionT=="COLMEX",
                   data$MaesPrograma,data$temp)
@@ -1619,7 +1606,7 @@ data$LicCCentro<-data$temp
 
 data$temp<-NA
 
-# Maestria
+# Maestría
 
 data$temp<-ifelse(data$MaesColmex==1 & data$MaesInstitucionT=="COLMEX",
                   data$MaesCentro,data$temp)
@@ -3679,7 +3666,7 @@ data$T1InicioA_ <- ifelse(data$T1InicioA_ == 99 | data$T1InicioA_ == 9999 | data
 data$T1DuracionA_ <- ifelse(data$T1DuracionA_ == 99 | data$T1DuracionA_ == 9999 | data$T1DuracionA_ == "NA", NA, data$T1DuracionA_)
 
 
-# Dividiendo por mes y a�o
+# Dividiendo por mes y año
 data$T2InicioT <- ifelse(data$T2InicioT == 99 | data$T2InicioT == 9999 | data$T2InicioT == "NA", NA, data$T2InicioT);
 data$T2InicioT_1Mes <- gsub("/(.*)", " \1", data$T2InicioT);
 data$T2InicioT_2Anio <- gsub("(.*)/", " \1", data$T2InicioT);
@@ -3754,20 +3741,6 @@ data$LicInstitucionT2 <- factor(data$LicInstitucionT2, levels=c(1,2,3,4,5,6,7,8,
 
 data$LicPColmex <- factor(data$LicPColmex, levels = c(1, 2, 99), labels = c("RRII", "PAP", "NE"))
 
-# Corregir, 
-# Aqui las variables ya no se llaman temp, sino que les asignamos el nombre real... o debemos revisar eso. Por ejemplo
-# puedes ver en la linea 977 del codigo, que se asignaron los valores de la vairable temp a la variable MaesPaisT, de ahi
-# volvimos a usar la variable temp para otras nuevas variables, entonces en las lineas de abajo no tendria sentido 
-# asignar de esa maner las etiquetas, 
-# Se deben cambiar de la siguiente manera: 
-# Actualmente esta: 
-data$MaesPaisT <- factor(data$temp, levels = c(1, 2, 3, 4, 5, 9, 99),
-                   labels = c("MEX", "EUAC", "EUR", "LATAM", "OTRO", "SinMaes", "NE"))
-# Deberia estar:
-data$MaesPaisT <- factor(data$MaesPaisT, levels = c(1, 2, 3, 4, 5, 9, 99),
-                         labels = c("MEX", "EUAC", "EUR", "LATAM", "OTRO", "SinMaes", "NE"))
-# Y seguir asi con las demas variables. 
-
 
 data$MaesPaisT2 <- factor(data$MaesPaisT2, levels = c(1, 2, 3, 4, 5, 8, 9, 99),
                    labels = c("MEX", "EUAC", "EUR", "LATAM", "OTRO", "SinMaes2", "SinMaes", "NE"))
@@ -3813,32 +3786,12 @@ data$T1InicioM_ <- factor(data$T1InicioM_ , levels = c(1, 2, 3, 4, 5, 6, 7, 8, 9
                   labels = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
                            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"))
 
-# ***************
+
 #************************************************************************************************************
-# ***************************************************************************************************************************
-# ***************************************************************************************************************************
-# ***************************************************************************************************************************
-# ANALISIS
 
-# ***************************************************************************************************************************
-# ***************************************************************************************************************************
-# ***************************************************************************************************************************
-# ***************************************************************************************************************************
-# ***************************************************************************************************************************
-# ***************************************************************************************************************************
-# ***************************************************************************************************************************
-# ***************************************************************************************************************************
+# RESUMEN ESTADÍSTICO
 
-
-# ***************************************************************************************************************************
-# ***************************************************************************************************************************
-# ***************************************************************************************************************************
-
-# RESUMEN ESTADISTICO
-
-# ***************************************************************************************************************************
-# ***************************************************************************************************************************
-
+# ***********************************************************************************************************
 
 
 # conviertiendo en factores las columnas del data frame
@@ -3847,7 +3800,7 @@ data$T1InicioM_ <- factor(data$T1InicioM_ , levels = c(1, 2, 3, 4, 5, 6, 7, 8, 9
 #str(LicenciaturaC);
 #Sys.time() - t
 
-#  ??Tuvo el estudiante de licenciatura del colmex, experiencia laboral previa al ingresar al programa? 
+#  ¿Tuvo el estudiante de licenciatura del colmex, experiencia laboral previa al ingresar al programa? 
 
 #LicenciaturaC$Sexo = factor(LicenciaturaC$Sexo, labels = c("Hombre", "Mujer"))
 #ExpPrevLic <- ftable(LicenciaturaC$ExpPrevia, LicenciaturaC$LicPrograma, LicenciaturaC$LicCentro, LicenciaturaC$Sexo)
@@ -3960,12 +3913,9 @@ data$iee5.3<- ifelse(!is.na(data$iee5.3) & data$iee5.3 != "Completa", "Incomplet
 
 ftable(data$iee5.3)
 
-
-##  seleccionando 
-## Trayectoria y Ubicacion en el Mercado Laboral del Egresado (tumle)
+ 
+##  Trayectoria y Ubicación en el Mercado Laboral del Egresado (tumle)
 ##  DE LA PREGUNTA 10 A LA PREGUNTA 14
-
-
 
 
 # PREGUNTA 10
